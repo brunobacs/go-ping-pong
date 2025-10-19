@@ -19,13 +19,16 @@ func pong(c chan string) {
 }
 
 func printar(c chan string) {
-	msg := <-c
-	fmt.Println(msg)
-	time.Sleep(time.Second * 1)
+	for i := 0; ; i++ {
+		msg := <-c
+		fmt.Println(msg)
+		time.Sleep(time.Second * 1)
+	}
+
 }
 
 func main() {
-	c := make(chan string)
+	var c chan string = make(chan string)
 
 	go ping(c)
 	go printar(c)
